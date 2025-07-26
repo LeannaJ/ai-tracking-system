@@ -1,58 +1,58 @@
 # 🤖 AI Research Tracker
 
-ElectronJS 기반 데스크톱 앱으로 연구부터 글쓰기까지의 과정을 추적하는 도구입니다.
+A desktop application built with ElectronJS that tracks the research and writing process from start to finish.
 
-## 🚀 기능
+## 🚀 Features
 
-### MVP 기능
-- **멀티 탭 WebView 인터페이스**
+### MVP Features
+- **Multi-tab WebView Interface**
   - ChatGPT (https://chat.openai.com)
   - Google Search (https://www.google.com)
-  - Custom URL 입력
+  - Custom URL input
   - Google Docs (https://docs.google.com)
 
-- **활동 로깅**
-  - ChatGPT: 프롬프트 제출 추적
-  - Google: 검색어 추적
-  - 웹사이트: 방문 URL, 시간 추적
-  - 탭 전환 활동
+- **Activity Logging**
+  - ChatGPT: Prompt submission tracking
+  - Google: Search query tracking
+  - Websites: URL visits and time tracking
+  - Tab switching activities
 
-- **로컬 스토리지**
-  - JSON 파일 기반 로그 저장 (`logs/actions.json`)
+- **Local Storage**
+  - JSON file-based log storage (`logs/actions.json`)
 
-## 📦 설치 및 실행
+## 📦 Installation & Setup
 
-### 1. 의존성 설치
+### 1. Install Dependencies
 ```bash
 npm install
 ```
 
-### 2. 앱 실행
+### 2. Run the Application
 ```bash
-# 일반 실행
+# Normal execution
 npm start
 
-# 개발 모드 (DevTools 포함)
+# Development mode (with DevTools)
 npm run dev
 ```
 
-## 📁 프로젝트 구조
+## 📁 Project Structure
 
 ```
 AI_Tracker/
-├── main.js              # Electron 메인 프로세스
-├── preload.js           # 보안 브리지
-├── index.html           # 메인 UI
-├── renderer.js          # 렌더러 프로세스 스크립트
-├── package.json         # 프로젝트 설정
-├── logs/                # 로그 저장 디렉토리
-│   └── actions.json     # 활동 로그 파일
-└── README.md           # 프로젝트 문서
+├── main.js              # Electron main process
+├── preload.js           # Security bridge
+├── index.html           # Main UI
+├── renderer.js          # Renderer process script
+├── package.json         # Project configuration
+├── logs/                # Log storage directory
+│   └── actions.json     # Activity log file
+└── README.md           # Project documentation
 ```
 
-## 📊 로그 형식
+## 📊 Log Format
 
-각 활동은 다음과 같은 형식으로 저장됩니다:
+Each activity is stored in the following format:
 
 ```json
 {
@@ -63,43 +63,43 @@ AI_Tracker/
 }
 ```
 
-### 지원하는 액션 타입
-- `prompt_submitted`: ChatGPT 프롬프트 제출
-- `search_submitted`: Google 검색
-- `page_loaded`: 페이지 로드
-- `navigation_started`: 페이지 네비게이션
-- `tab_switched`: 탭 전환
-- `url_loaded`: 커스텀 URL 로드
+### Supported Action Types
+- `prompt_submitted`: ChatGPT prompt submission
+- `search_submitted`: Google search
+- `page_loaded`: Page load
+- `navigation_started`: Page navigation
+- `tab_switched`: Tab switching
+- `url_loaded`: Custom URL load
 
-## 🔧 개발
+## 🔧 Development
 
-### 개발 모드 실행
+### Run in Development Mode
 ```bash
 npm run dev
 ```
 
-개발 모드에서는 DevTools가 자동으로 열리고 콘솔에서 로그를 확인할 수 있습니다.
+In development mode, DevTools will automatically open and you can check logs in the console.
 
-### 로그 확인
-- 앱 내에서 실시간 로그 상태 확인 가능
-- `logs/actions.json` 파일에서 저장된 로그 확인
-- 개발 모드에서 콘솔에서 로그 출력
+### Log Monitoring
+- Real-time log status checking within the app
+- View saved logs in `logs/actions.json` file
+- Log output in console during development mode
 
-## 🎯 향후 계획
+## 🎯 Future Plans
 
-### 다음 단계 (MVP 이후)
-- [ ] Google Docs API 연동으로 실시간 글쓰기 추적
-- [ ] 대시보드 UI로 시각화
-- [ ] 연구 경로 시각화
-- [ ] 인용 경로 추적
-- [ ] 데이터 내보내기 기능
+### Next Steps (Post-MVP)
+- [ ] Google Docs API integration for real-time writing tracking
+- [ ] Dashboard UI for visualization
+- [ ] Research path visualization
+- [ ] Citation path tracking
+- [ ] Data export functionality
 
-## ⚠️ 주의사항
+## ⚠️ Important Notes
 
-- ChatGPT와 Google Docs는 로그인이 필요할 수 있습니다
-- 일부 웹사이트는 WebView에서 제한적으로 작동할 수 있습니다
-- 로그 데이터는 로컬에만 저장되며, 개인정보 보호를 위해 외부로 전송되지 않습니다
+- ChatGPT and Google Docs may require login
+- Some websites may have limited functionality in WebView
+- Log data is stored locally only and is not transmitted externally for privacy protection
 
-## 📝 라이선스
+## 📝 License
 
 ISC License 
