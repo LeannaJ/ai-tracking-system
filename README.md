@@ -139,9 +139,11 @@ In development mode, DevTools will open automatically and logs appear in the con
   </tr>
 </table>
 
-<p align="center">
-  <img src="public/5.png" alt="Screenshot 5" width="640" style="border: 1px solid #ddd; border-radius: 6px; padding: 4px; background: #fff;" />
-</p>
+<table align="center">
+  <tr>
+    <td align="center"><img src="public/5.png" alt="Screenshot 5" width="640" /></td>
+  </tr>
+</table>
 
 ## 📝 License
 
