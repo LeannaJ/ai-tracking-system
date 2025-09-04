@@ -128,13 +128,20 @@ In development mode, DevTools will open automatically and logs appear in the con
 
 ## 📷 Screenshots
 
-<div align="center">
-  <img src="public/1.png" alt="Screenshot 1" width="320" />
-  <img src="public/2.png" alt="Screenshot 2" width="320" />
-  <img src="public/3.png" alt="Screenshot 3" width="320" />
-  <img src="public/4.png" alt="Screenshot 4" width="320" />
-  <img src="public/5.png" alt="Screenshot 5" width="320" />
-</div>
+<table align="center">
+  <tr>
+    <td align="center"><img src="public/1.png" alt="Screenshot 1" width="320" /></td>
+    <td align="center"><img src="public/2.png" alt="Screenshot 2" width="320" /></td>
+  </tr>
+  <tr>
+    <td align="center"><img src="public/3.png" alt="Screenshot 3" width="320" /></td>
+    <td align="center"><img src="public/4.png" alt="Screenshot 4" width="320" /></td>
+  </tr>
+</table>
+
+<p align="center">
+  <img src="public/5.png" alt="Screenshot 5" width="800" />
+</p>
 
 ## 📝 License
 
