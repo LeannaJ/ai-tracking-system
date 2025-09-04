@@ -95,3 +95,7 @@ Thumbs.db
 logs
 *.log AI_Tracker_Detail.md
 backup/
+
+# Exclude details and backups
+AI_Tracker_Detail.md
+backup/
