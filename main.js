@@ -1,6 +1,7 @@
 const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
 const fs = require('fs');
+const https = require('https');
 
 // 로그 디렉토리 생성
 const logsDir = path.join(__dirname, 'logs');
@@ -89,4 +90,43 @@ ipcMain.handle('load-logs', async () => {
     console.error('Log read failed:', error);
     return [];
   }
-}); 
+});
+
+// API 키 저장 IPC 핸들러
+ipcMain.handle('save-api-key', async (event, apiKey) => {
+  try {
+    const configFile = path.join(__dirname, 'config.json');
+    const config = { openaiApiKey: apiKey };
+    fs.writeFileSync(configFile, JSON.stringify(config, null, 2));
+    return { success: true };
+  } catch (error) {
+    console.error('API key save failed:', error);
+    return { success: false, error: error.message };
+  }
+});
+
+// 복사된 텍스트 추가 IPC 핸들러
+ipcMain.handle('add-copied-text', async (event, { text, url, title }) => {
+  try {
+    // 렌더러 프로세스에 복사된 텍스트 추가 요청
+    mainWindow.webContents.send('add-copied-text-to-editor', { text, url, title });
+    return { success: true };
+  } catch (error) {
+    console.error('Add copied text failed:', error);
+    return { success: false, error: error.message };
+  }
+});
+
+// 복사된 텍스트 추적 IPC 핸들러
+ipcMain.handle('track-copied-text', async (event, { text, url, title, timestamp }) => {
+  try {
+    // 렌더러 프로세스에 복사된 텍스트 추적 요청
+    mainWindow.webContents.send('track-copied-text-to-attribution', { text, url, title, timestamp });
+    return { success: true };
+  } catch (error) {
+    console.error('Track copied text failed:', error);
+    return { success: false, error: error.message };
+  }
+});
+
+// OpenAI API 관련 코드 제거됨 - 이제 WebView만 사용 

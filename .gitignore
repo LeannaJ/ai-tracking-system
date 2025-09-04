@@ -93,4 +93,5 @@ Thumbs.db
 
 # Logs
 logs
-*.log 
+*.log AI_Tracker_Detail.md
+backup/
