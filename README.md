@@ -140,7 +140,7 @@ In development mode, DevTools will open automatically and logs appear in the con
 </table>
 
 <p align="center">
-  <img src="public/5.png" alt="Screenshot 5" width="800" />
+  <img src="public/5.png" alt="Screenshot 5" width="640" />
 </p>
 
 ## 📝 License
