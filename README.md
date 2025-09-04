@@ -9,25 +9,31 @@ A desktop application built with ElectronJS that tracks the research and writing
   - ChatGPT (https://chat.openai.com)
   - Google Search (https://www.google.com)
   - Custom URL input
-  - Google Docs (https://docs.google.com)
+  - Text Editor (local autosave)
 
 - **Activity Logging**
-  - ChatGPT: Prompt submission tracking
-  - Google: Search query tracking
-  - Websites: URL visits and time tracking
+  - ChatGPT: prompt/copy detection (simple copy detection within WebView)
+  - Google: search query tracking (URL-based)
+  - Websites: URL visit and page load tracking
   - Tab switching activities
+  - Text Editor: save/paste/copy events and source estimation
 
 - **Local Storage**
   - JSON file-based log storage (`logs/actions.json`)
+  - Text editor content is autosaved to `localStorage`
 
 ## 📦 Installation & Setup
 
-### 1. Install Dependencies
+### 1. Requirements
+- Node.js 18+
+- macOS (for development environment)
+
+### 2. Install Dependencies
 ```bash
 npm install
 ```
 
-### 2. Run the Application
+### 3. Run the Application
 ```bash
 # Normal execution
 npm start
@@ -39,15 +45,17 @@ npm run dev
 ## 📁 Project Structure
 
 ```
-AI_Tracker/
-├── main.js              # Electron main process
-├── preload.js           # Security bridge
-├── index.html           # Main UI
-├── renderer.js          # Renderer process script
+ai_tracking_system/
+├── main.js              # Electron main process (window + logging IPC)
+├── preload.js           # Security bridge (exposes IPC API)
+├── index.html           # Main UI (tabs/editor/debug panel)
+├── renderer.js          # Renderer (tabs/logging/editor/source estimation)
+├── attribution/
+│   └── attribution-tracker.js  # Attribution logic (collects web/editor activity)
+├── logs/
+│   └── actions.json     # Activity log (auto-generated)
 ├── package.json         # Project configuration
-├── logs/                # Log storage directory
-│   └── actions.json     # Activity log file
-└── README.md           # Project documentation
+└── README.md            # Project documentation
 ```
 
 ## 📊 Log Format
@@ -68,8 +76,34 @@ Each activity is stored in the following format:
 - `search_submitted`: Google search
 - `page_loaded`: Page load
 - `navigation_started`: Page navigation
+- `navigation_back|forward|refresh|home`: Navigation controls used
 - `tab_switched`: Tab switching
 - `url_loaded`: Custom URL load
+- `text_saved`: Text editor manual/auto save
+- `text_editor_pasted`: Paste into editor (with estimated source/confidence)
+- `text_editor_copied`: Copy from editor
+- `text_pasted`: Paste summary log entry
+
+## 🧭 Tabs & Tracking
+
+- **ChatGPT**
+  - WebView load; logs page load/navigation
+  - Simple copy detection (selection + copy event)
+- **Google**
+  - Extracts `q` parameter from search URL and logs query
+  - Logs page load/navigation
+- **Custom URL**
+  - Navigate to entered URL; logs load/navigation
+- **Text Editor**
+  - Autosaves (5s debounce)
+  - Logs copy/paste and shows recent activity/paragraph stats in debug
+
+## 🧪 Debug & Attribution
+
+- Toggle the debug panel with the `📊` button (bottom-right)
+- Shows recent activity, tab switches, current status, and recent paragraphs
+- Real-time panel shows current tab, last switch time, elapsed time, and recent pastes
+- `attribution/attribution-tracker.js` aggregates web/editor activity and estimates source with confidence
 
 ## 🔧 Development
 
@@ -78,27 +112,29 @@ Each activity is stored in the following format:
 npm run dev
 ```
 
-In development mode, DevTools will automatically open and you can check logs in the console.
+In development mode, DevTools will open automatically and logs appear in the console.
 
 ### Log Monitoring
-- Real-time log status checking within the app
-- View saved logs in `logs/actions.json` file
-- Log output in console during development mode
+- Real-time status is visible in the app header and debug panel
+- Persisted logs: `logs/actions.json`
 
-## 🎯 Future Plans
+## ⚠️ Notes
 
-### Next Steps (Post-MVP)
-- [ ] Google Docs API integration for real-time writing tracking
-- [ ] Dashboard UI for visualization
-- [ ] Research path visualization
-- [ ] Citation path tracking
-- [ ] Data export functionality
+- ChatGPT/Google/some sites require login
+- Some sites may be restricted due to WebView security policies
+- Ad/tracking/analytics domains/patterns are filtered from logs (see `shouldLogNavigation` in `renderer.js`)
+- Text is saved locally via `localStorage` and is not transmitted externally
+- `.gitignore` excludes personal/backup files such as `AI_Tracker_Detail.md` and `backup/`
 
-## ⚠️ Important Notes
+## 📷 Screenshots
 
-- ChatGPT and Google Docs may require login
-- Some websites may have limited functionality in WebView
-- Log data is stored locally only and is not transmitted externally for privacy protection
+<div align="center">
+  <img src="public/1.png" alt="Screenshot 1" width="320" />
+  <img src="public/2.png" alt="Screenshot 2" width="320" />
+  <img src="public/3.png" alt="Screenshot 3" width="320" />
+  <img src="public/4.png" alt="Screenshot 4" width="320" />
+  <img src="public/5.png" alt="Screenshot 5" width="320" />
+</div>
 
 ## 📝 License
 
